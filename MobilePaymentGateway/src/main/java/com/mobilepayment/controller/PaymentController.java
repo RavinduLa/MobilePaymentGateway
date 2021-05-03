@@ -38,6 +38,11 @@ public class PaymentController {
 	@PostMapping(value="makePayment")
 	public boolean makePayment(@RequestBody  Payment payment) {
 		
+		System.out.println();
+		System.out.println("---TLS Mobile Payments---");
+		System.out.println("---Payment request received---");
+		System.out.println("---Begining process---");
+		
 		String userPhoneNumber = payment.getPhoneNumer();
 		int userPin = payment.getPin();
 		PaymentSubscriber paymentSubscriber = paymentSubscriberRepository.findByMobileNumber(userPhoneNumber);
@@ -63,7 +68,7 @@ public class PaymentController {
 		}
 		else
 		{
-			System.out.println("PIN verification issue.....");
+			System.out.println("Subscriber verification issue.....");
 			System.out.println("Returning false to the merchant....");
 			return false;
 		}
