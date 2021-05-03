@@ -22,15 +22,17 @@ import com.mobilepayment.model.Transaction;
 @CrossOrigin(origins ="*",allowedHeaders = "*",exposedHeaders = "*")
 public class PaymentController {
 	
+	@Autowired
 	private PaymentSubscriberRepository paymentSubscriberRepository;
 	
+	@Autowired
 	private TransactionRepository transactionRepository;
 	
-	@Autowired
+	/*@Autowired
 	public PaymentController(PaymentSubscriberRepository paymentSubscriberRepository, TransactionRepository transactionRepository) {
 		this.paymentSubscriberRepository = paymentSubscriberRepository;
 		this.transactionRepository = transactionRepository;
-	}
+	}*/
 	
 	
 	@PostMapping(value="makePayment")
