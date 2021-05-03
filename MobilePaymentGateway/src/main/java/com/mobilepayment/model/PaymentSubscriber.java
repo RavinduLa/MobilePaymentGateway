@@ -22,17 +22,25 @@ public class PaymentSubscriber {
 	@Column(name="pin")
 	private int pin;
 	
+	@Column(name="enabled")
+	private boolean enabled;
+	
 	public PaymentSubscriber() {
 		
 	}
 	
-	public PaymentSubscriber(String nIC, String subscriberName, String mobileNumber, int pin) {
+	
+
+	public PaymentSubscriber(String nIC, String subscriberName, String mobileNumber, int pin, boolean enabled) {
 		super();
 		NIC = nIC;
 		this.subscriberName = subscriberName;
 		this.mobileNumber = mobileNumber;
 		this.pin = pin;
+		this.enabled = enabled;
 	}
+
+
 
 	public String getNIC() {
 		return NIC;
@@ -66,10 +74,35 @@ public class PaymentSubscriber {
 		this.pin = pin;
 	}
 
+	
+	public String getSubscriberName() {
+		return subscriberName;
+	}
+
+
+
+	public void setSubscriberName(String subscriberName) {
+		this.subscriberName = subscriberName;
+	}
+
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "PaymentSubscriber [NIC=" + NIC + ", name=" + subscriberName + ", mobileNumber=" + mobileNumber + ", pin=" + pin
-				+ "]";
+		return "PaymentSubscriber [NIC=" + NIC + ", subscriberName=" + subscriberName + ", mobileNumber=" + mobileNumber
+				+ ", pin=" + pin + ", enabled=" + enabled + "]";
 	}
 	
 	
