@@ -35,51 +35,68 @@ public class PaymentApi {
 		System.out.println("---Payment request received---");
 		System.out.println("---Begining process---");
 		
-		String userPhoneNumber = payment.getPhoneNumer();
+		String userPhoneNumber = payment.getPhoneNumber();
 		int userPin = payment.getPin();
 		PaymentSubscriber paymentSubscriber = paymentSubscriberRepository.findByMobileNumber(userPhoneNumber);
-		boolean pinMathced = validateDetails(userPin, paymentSubscriber);
 		
-		if(pinMathced)
-		{
-			boolean transactionCompleted = processTransaction(payment.getAmount(), payment.getMerchantId(), userPhoneNumber);
+		
+		if(paymentSubscriber == null) {
+			System.out.println("The entered subscriber: " + userPhoneNumber + " is not subscribed for payments");
+			paymentResponse.setMessage("Number is not subscribed for payments");
+			paymentResponse.setStatus("falied");
+			paymentResponse.setValidPin(false);
+			paymentResponse.setPaymentSuccesful(false);
 			
-			if(transactionCompleted)
-			{
-				System.out.println("Transaction completed......");
-				System.out.println("Returning success to the merchant....");
-				
-				paymentResponse.setStatus("success");
-				paymentResponse.setMessage("payment succesful");
-				paymentResponse.setValidPin(true);
-				paymentResponse.setPaymentSuccesful(true);
-				return paymentResponse;
-				
-			}
-			else
-			{
-				System.out.println("Transaction incomplete......");
-				System.out.println("Returning failure to the merchant....");
-				
-				
-				paymentResponse.setStatus("failed");
-				paymentResponse.setMessage("payment failed");
-				paymentResponse.setValidPin(true);
-				paymentResponse.setPaymentSuccesful(false);
-				return paymentResponse;
-			}
+			return paymentResponse;
 		}
 		else
 		{
-			System.out.println("Subscriber verification issue.....");
-			System.out.println("Returning failure to the merchant....");
+			boolean pinMathced = validateDetails(userPin, paymentSubscriber);
 			
-			paymentResponse.setStatus("failed");
-			paymentResponse.setMessage("payment failed");
-			paymentResponse.setValidPin(false);
-			paymentResponse.setPaymentSuccesful(false);
-			return paymentResponse;
+			if(pinMathced)
+			{
+				boolean transactionCompleted = processTransaction(payment.getAmount(), payment.getMerchantId(), userPhoneNumber);
+				
+				if(transactionCompleted)
+				{
+					System.out.println("Transaction completed......");
+					System.out.println("Returning success to the merchant....");
+					
+					paymentResponse.setStatus("success");
+					paymentResponse.setMessage("Payment Succesful");
+					paymentResponse.setValidPin(true);
+					paymentResponse.setPaymentSuccesful(true);
+					return paymentResponse;
+					
+				}
+				else
+				{
+					System.out.println("Transaction incomplete......");
+					System.out.println("Returning failure to the merchant....");
+					
+					
+					paymentResponse.setStatus("failed");
+					paymentResponse.setMessage("Payment failed. Internal Error");
+					paymentResponse.setValidPin(true);
+					paymentResponse.setPaymentSuccesful(false);
+					return paymentResponse;
+				}
+			}
+			else
+			{
+				System.out.println("Subscriber verification issue.....");
+				System.out.println("Returning failure to the merchant....");
+				
+				paymentResponse.setStatus("failed");
+				paymentResponse.setMessage("Payment failed. Pin mismatch or Subscriber payments disabled.");
+				paymentResponse.setValidPin(false);
+				paymentResponse.setPaymentSuccesful(false);
+				return paymentResponse;
+			}
+			
 		}
+		
+		
 		
 	}
 	

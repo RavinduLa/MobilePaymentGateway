@@ -2,7 +2,7 @@ package com.mobilepayment.model;
 
 public class Payment {
 	
-	private String phoneNumer;
+	private String phoneNumber;
 	private int pin;
 	private double amount;
 	private int merchantId;
@@ -11,20 +11,20 @@ public class Payment {
 		
 	}
 	
-	public Payment(String phoneNumer, int pin, double amount, int merchantId) {
+	public Payment(String phoneNumber, int pin, double amount, int merchantId) {
 		super();
-		this.phoneNumer = phoneNumer;
+		this.phoneNumber = phoneNumber;
 		this.pin = pin;
 		this.amount = amount;
 		this.merchantId = merchantId;
 	}
 
-	public String getPhoneNumer() {
-		return phoneNumer;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhoneNumer(String phoneNumer) {
-		this.phoneNumer = phoneNumer;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public int getPin() {
@@ -53,7 +53,7 @@ public class Payment {
 
 	@Override
 	public String toString() {
-		return "Payment [phoneNumer=" + phoneNumer + ", pin=" + pin + ", amount=" + amount + ", merchantId="
+		return "Payment [phoneNumer=" + phoneNumber + ", pin=" + pin + ", amount=" + amount + ", merchantId="
 				+ merchantId + "]";
 	}
 	
