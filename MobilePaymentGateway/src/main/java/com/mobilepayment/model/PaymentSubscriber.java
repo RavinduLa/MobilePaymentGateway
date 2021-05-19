@@ -11,19 +11,19 @@ public class PaymentSubscriber {
 	
 	@Id
 	@Column(name="nic")
-	private String NIC;
+	private String NIC;  //NIC number of the payment subscriber
 	
 	@Column(name="subscriber_name")
-	private String subscriberName;
+	private String subscriberName;  //name of the subscriber
 	
 	@Column(name="mobile_number")
-	private String mobileNumber;
+	private String mobileNumber;  //mobile number which is registered to make payments.
 	
 	@Column(name="pin")
-	private int pin;
+	private int pin;  // 4 digit pin
 	
 	@Column(name="enabled")
-	private boolean enabled;
+	private boolean enabled;  //whether the subscriber is enabled for payments
 	
 	public PaymentSubscriber() {
 		

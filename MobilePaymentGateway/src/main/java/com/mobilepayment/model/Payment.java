@@ -2,10 +2,10 @@ package com.mobilepayment.model;
 
 public class Payment {
 	
-	private String phoneNumber;
-	private int pin;
-	private double amount;
-	private int merchantId;
+	private String phoneNumber;  //phone number of the subscriber
+	private int pin;  // pin number of the subscriber
+	private double amount;  //amount to be paid
+	private int merchantId; // merchant id set by merchant
 	
 	public Payment() {
 		
